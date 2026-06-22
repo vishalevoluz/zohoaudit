@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\" | Where-Object { $_.Name -ne 'node_modules' } | Select-Object -Property Name, FullName)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\" -Exclude node_modules | ForEach-Object { if \\($_.PSIsContainer\\) { \"[DIR] \" + $_.Name } else { \"[FILE] \" + $_.Name } })",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\src\" -Recurse -Exclude node_modules | Select-Object -Property @{N='Path'; E={$_.FullName.Replace\\(\"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\\", \"\"\\)}} | Sort-Object)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\.claude\" -Recurse | Select-Object -Property @{N='Path'; E={$_.FullName.Replace\\(\"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\\", \"\"\\)}})",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\" -Depth 3 -Exclude node_modules,dist | Where-Object { $_.Name -match '\\(server|api|backend|routes|auth\\)' })",
+      "PowerShell(Get-Content *)",
+      "PowerShell(cd \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\"; Start-Process powershell -ArgumentList '-NoProfile -Command \"npm run dev 2>&1 | Tee-Object -FilePath dev-output.log\"' -WindowStyle Normal)",
+      "PowerShell(cd \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\"; Start-Process powershell -ArgumentList '-NoProfile -Command \"cd ''C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit''; npm run dev 2>&1 | Tee-Object -FilePath dev-output.log\"' -WindowStyle Normal; Start-Sleep -Seconds 6; Get-Content \"dev-output.log\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(head *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\src\" -Recurse | Where-Object { $_.Extension -in @\\('.tsx', '.ts', '.jsx', '.js', '.json', '.css'\\) } | Select-Object -Property Name, @{Name='FullPath'; Expression={$_.FullName}}, @{Name='Directory'; Expression={$_.Directory.Name}})",
+      "PowerShell(ls *)",
+      "WebSearch",
+      "Skill(claude-api)",
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(Start-Sleep -Seconds 2; Invoke-RestMethod -Uri \"http://localhost:3001/api/zoho/modules\" -Method GET -TimeoutSec 30 | ConvertTo-Json -Depth 2 | Select-Object -First 40)",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\.tokens.json\" | ConvertFrom-Json | Select-Object -Property @{N='has_access_token'; E={$_.access_token -ne $null}}, @{N='has_refresh_token'; E={$_.refresh_token -ne $null}}, api_domain, @{N='expires_at'; E={ [DateTimeOffset]::FromUnixTimeMilliseconds\\($_.expires_at\\).LocalDateTime }})",
+      "PowerShell($t = Get-Content \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\\\\.tokens.json\" | ConvertFrom-Json; Write-Host \"has access_token: $\\($t.access_token -ne $null\\)\"; Write-Host \"has refresh_token: $\\($t.refresh_token -ne $null\\)\"; Write-Host \"api_domain: $\\($t.api_domain\\)\")",
+      "mcp__zoho-crm__ZohoCRM_getRecordCount",
+      "mcp__zoho-crm__ZohoCRM_getWorkflowRulesCount",
+      "mcp__zoho-crm__ZohoCRM_getWorkflowRules",
+      "mcp__zoho-crm__ZohoCRM_getFields",
+      "PowerShell(cd \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\"; Start-Process powershell -ArgumentList '-NoProfile -Command \"cd ''C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit''; node server/index.js 2>&1 | Tee-Object -FilePath server.log\"' -WindowStyle Minimized; Start-Sleep -Seconds 5; Get-Content server.log -ErrorAction SilentlyContinue)",
+      "PowerShell(Start-Sleep -Seconds 2; Invoke-RestMethod -Uri \"http://localhost:3001/api/auth/status\" -Method GET -TimeoutSec 10 | ConvertTo-Json)",
+      "PowerShell(Start-Sleep -Seconds 4; Invoke-RestMethod -Uri \"http://localhost:3000/api/auth/status\" -Method GET -TimeoutSec 15 | ConvertTo-Json)",
+      "mcp__zoho-crm__ZohoCRM_getModules",
+      "PowerShell($git = \"C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe\"; cd \"C:\\\\Users\\\\ABC\\\\Downloads\\\\crm-audit-studio\\\\crm-audit\"; & $git init)",
+      "PowerShell(git *)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "zoho-crm"
+  ]
+}
